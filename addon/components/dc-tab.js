@@ -47,10 +47,6 @@ export default Component.extend({
   }),
   'aria-expanded': alias('aria-selected'),
 
-  // willInsertElement() {
-  //   this.send('registerTab', this);
-  // },
-
   selectFromTabsSelectedIndexOnInit: function() {
     Ember.run.schedule('afterRender', this, function() {
       this.send('registerTab', this);
