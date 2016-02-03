@@ -32,15 +32,17 @@ export default Component.extend({
 
   'aria-labeledby': alias('tab.elementId'),
 
-  willInsertElement() {
-    this.send('registerTabPanel', this);
-  },
+  registerTabPanelOnInit: function() {
+    Ember.run.schedule('afterRender', this, function() {
+      this.send('registerTabPanel', this);
+    });
+  }.on('init'),
 
   willDestroyElement() {
     this.send('unregisterTabPanel', this);
   },
 
-  tab: computed('tabList.tabs.@each', 'tabPanels.@each', function() {
+  tab: computed('tabList.tabs.[]', 'tabPanels.[]', function() {
     const index = this.get('tabPanels').indexOf(this);
     const tabs = this.get('tabList.tabs');
     return tabs && tabs.objectAt(index);

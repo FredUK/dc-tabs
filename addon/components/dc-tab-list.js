@@ -29,9 +29,11 @@ export default Component.extend({
 
   activeTab: alias('tabsComponent.activeTab'),
 
-  willInsertElement() {
-    this.send('registerTabList', this);
-  },
+  registerTabListOnInit: function() {
+    Ember.run.schedule('afterRender', this, function() {
+      this.send('registerTabList', this);
+    });
+  }.on('init'),
 
   tabs: computed(function() {
     return ArrayProxy.create({

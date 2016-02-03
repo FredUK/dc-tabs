@@ -47,13 +47,16 @@ export default Component.extend({
   }),
   'aria-expanded': alias('aria-selected'),
 
-  willInsertElement() {
-    this.send('registerTab', this);
-  },
+  // willInsertElement() {
+  //   this.send('registerTab', this);
+  // },
 
-  didInsertElement() {
-    this.selectFromTabsSelectedIndex();
-  },
+  selectFromTabsSelectedIndexOnInit: function() {
+    Ember.run.schedule('afterRender', this, function() {
+      this.send('registerTab', this);
+      this.selectFromTabsSelectedIndex();
+    });
+  }.on('init'),
 
   willDestroyElement() {
     this.send('unregisterTab', this);
@@ -72,11 +75,11 @@ export default Component.extend({
     }
   }),
 
-  index: computed('tabList.tabs.@each', function() {
+  index: computed('tabList.tabs.[]', function() {
     return this.get('tabList.tabs').indexOf(this);
   }),
 
-  tabPanel: computed('tabs.tabPanels.@each', function() {
+  tabPanel: computed('tabs.tabPanels.[]', function() {
     const index = this.get('index');
     const panels = this.get('tabs.tabPanels');
     return panels && panels.objectAt(index);
