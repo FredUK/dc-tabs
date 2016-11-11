@@ -40,7 +40,7 @@ export default Component.extend({
   }),
 
   tabs: alias('tabList.tabsComponent'),
-  tabList: alias('parentView'),
+  tabList: function() { return this.get('parentView')}.property(),
   'aria-controls': alias('tabPanel.elementId'),
   'aria-selected': computed('active', function() {
     return this.get('active').toString();
