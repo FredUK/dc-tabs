@@ -50,10 +50,6 @@ export default Component.extend({
 
   active: computed('tab.active', function() {
     return this.get('tab.active');
-  }),
-
-  toggleVisibility: observer('active', function() {
-    const display = this.get('active') ? '' : 'none';
-    if(!this.get('isDestroyed')) this.$().css('display', display);
   })
+
 });
