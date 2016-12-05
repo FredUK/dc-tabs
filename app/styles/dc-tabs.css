@@ -50,6 +50,10 @@ dc-tab:focus:after {
   right: -4px;
 }
 
+dc-tab-panel {
+  display: none;
+}
+
 dc-tab-panel.active {
   display: block;
 }

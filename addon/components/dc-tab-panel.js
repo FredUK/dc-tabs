@@ -54,6 +54,6 @@ export default Component.extend({
 
   toggleVisibility: observer('active', function() {
     const display = this.get('active') ? '' : 'none';
-    this.$().css('display', display);
+    if(!this.get('isDestroyed')) this.$().css('display', display);
   })
 });
