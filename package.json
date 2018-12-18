@@ -13,7 +13,7 @@
   },
   "repository": "https://github.com/devon-capital/dc-tabs",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": "^4.5 || 6.* || >= 7.*"
   },
   "author": "",
   "license": "MIT",
@@ -41,5 +41,8 @@
   ],
   "ember-addon": {
     "configPath": "tests/dummy/config"
+  },
+  "dependencies": {
+    "ember-cli-babel": "^6.6.0"
   }
 }
