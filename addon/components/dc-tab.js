@@ -25,7 +25,8 @@ export default Component.extend({
     'aria-selected',
     'aria-expanded',
     'tabindex',
-    'selected'
+    'selected',
+    'disabled'
   ],
 
   target: alias('tabList'),
@@ -63,6 +64,7 @@ export default Component.extend({
   }),
 
   select: on('click', function(options) {
+    if (this.get('disabled')) return;
     this.get('tabs').select(this);
     if (options && options.focus) {
       schedule('afterRender', this, function() {
@@ -90,7 +92,9 @@ export default Component.extend({
     const index = parseInt(this.get('tabs.selected-index'), 10);
     const myIndex = this.get('index');
     if (index === myIndex || (this.get('custom-index') && this.get('custom-index') === selectedIndex)) {
-      this.select();
+      if (!this.get('isDisabled')) {
+        this.select();
+      }
     }
   })
 });
